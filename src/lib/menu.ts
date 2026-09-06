@@ -9,18 +9,24 @@ const MENU_KEY = "cafe:menu";
 
 let cachedClient: Redis | null = null;
 
-/** Lazily builds the Upstash client, with a clear error if it isn't configured. */
+/**
+ * Lazily builds the Upstash client, with a clear error if it isn't configured.
+ * Accepts both env var namings: UPSTASH_REDIS_REST_* (a plain Upstash.com
+ * account, or the older Vercel Marketplace naming) and KV_REST_API_* (what
+ * Vercel's current "Upstash for Redis" integration injects), so it works
+ * regardless of how the database was provisioned.
+ */
 function getRedis(): Redis {
   if (cachedClient) return cachedClient;
 
-  const url = process.env.UPSTASH_REDIS_REST_URL;
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+  const url = process.env.UPSTASH_REDIS_REST_URL ?? process.env.KV_REST_API_URL;
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN ?? process.env.KV_REST_API_TOKEN;
   if (!url || !token) {
     throw new Error(
-      "Missing UPSTASH_REDIS_REST_URL / UPSTASH_REDIS_REST_TOKEN. " +
-        "Create a free database at https://upstash.com (or add the 'Upstash' " +
-        "integration from the Vercel Marketplace) and set these env vars — " +
-        "see .env.example."
+      "Missing Upstash Redis env vars (UPSTASH_REDIS_REST_URL / UPSTASH_REDIS_REST_TOKEN, " +
+        "or KV_REST_API_URL / KV_REST_API_TOKEN). Create a free database at " +
+        "https://upstash.com (or add the 'Upstash for Redis' integration from the " +
+        "Vercel Marketplace) and set these env vars — see .env.example."
     );
   }
 
