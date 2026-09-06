@@ -1,0 +1,307 @@
+{
+  "categories": [
+    {
+      "id": "coffees",
+      "name": { "en": "Coffees", "tr": "Kahveler" },
+      "tagline": { "en": "Freshly ground, carefully brewed", "tr": "Taze çekilmiş, özenle demlenmiş" },
+      "image": "https://images.unsplash.com/photo-1758593386033-cb1f842d550c?auto=format&fit=crop&w=800&q=80",
+      "order": 1
+    },
+    {
+      "id": "cold-beverages",
+      "name": { "en": "Cold Beverages", "tr": "Soğuk İçecekler" },
+      "tagline": { "en": "Cool, crisp, refreshing", "tr": "Serinletici ve canlandırıcı" },
+      "image": "https://images.unsplash.com/photo-1527156231393-7023794f363c?auto=format&fit=crop&w=800&q=80",
+      "order": 2
+    },
+    {
+      "id": "desserts-bakery",
+      "name": { "en": "Desserts & Bakery", "tr": "Tatlılar & Fırın Ürünleri" },
+      "tagline": { "en": "Straight from our oven", "tr": "Fırından yeni çıkmış lezzetler" },
+      "image": "https://images.unsplash.com/photo-1782864639148-91dcc2ad0a7b?auto=format&fit=crop&w=800&q=80",
+      "order": 3
+    },
+    {
+      "id": "snacks",
+      "name": { "en": "Snacks", "tr": "Atıştırmalıklar" },
+      "tagline": { "en": "Hearty bites, any time of day", "tr": "Doyurucu ve lezzetli atıştırmalıklar" },
+      "image": "https://images.unsplash.com/photo-1642487039001-c2e78f9a0095?auto=format&fit=crop&w=800&q=80",
+      "order": 4
+    }
+  ],
+  "items": [
+    {
+      "id": "espresso",
+      "categoryId": "coffees",
+      "name": { "en": "Espresso", "tr": "Espresso" },
+      "description": {
+        "en": "Bold, concentrated shot of our house single-origin blend.",
+        "tr": "Kendine özgü tek kökenli harmanımızdan hazırlanan yoğun ve sert bir shot."
+      },
+      "price": 75,
+      "image": "https://images.unsplash.com/photo-1572286258217-40142c1c6a70?auto=format&fit=crop&w=800&q=80",
+      "popular": true,
+      "active": true
+    },
+    {
+      "id": "americano",
+      "categoryId": "coffees",
+      "name": { "en": "Americano", "tr": "Americano" },
+      "description": {
+        "en": "Espresso lengthened with hot water for a smooth, mellow cup.",
+        "tr": "Sıcak suyla uzatılmış espresso; yumuşak ve dengeli bir fincan."
+      },
+      "price": 85,
+      "image": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80",
+      "popular": false,
+      "active": true
+    },
+    {
+      "id": "cappuccino",
+      "categoryId": "coffees",
+      "name": { "en": "Cappuccino", "tr": "Cappuccino" },
+      "description": {
+        "en": "Espresso topped with steamed milk and a thick layer of foam.",
+        "tr": "Buharda ısıtılmış süt ve kalın bir köpük tabakasıyla taçlandırılmış espresso."
+      },
+      "price": 95,
+      "image": "https://images.unsplash.com/photo-1720214931419-7cb11ee42c59?auto=format&fit=crop&w=800&q=80",
+      "popular": true,
+      "active": true
+    },
+    {
+      "id": "latte",
+      "categoryId": "coffees",
+      "name": { "en": "Latte", "tr": "Latte" },
+      "description": {
+        "en": "Silky steamed milk poured over a double shot of espresso.",
+        "tr": "Çift shot espresso üzerine dökülen ipeksi, buharda ısıtılmış süt."
+      },
+      "price": 105,
+      "image": "https://images.unsplash.com/photo-1512568400610-62da28bc8a13?auto=format&fit=crop&w=800&q=80",
+      "popular": false,
+      "active": true
+    },
+    {
+      "id": "flat-white",
+      "categoryId": "coffees",
+      "name": { "en": "Flat White", "tr": "Flat White" },
+      "description": {
+        "en": "Velvety micro-foam poured over a double ristretto shot.",
+        "tr": "Çift ristretto shot üzerine dökülen kadifemsi mikro köpük."
+      },
+      "price": 110,
+      "image": "https://images.unsplash.com/photo-1503481766315-7a586b20f66d?auto=format&fit=crop&w=800&q=80",
+      "popular": false,
+      "active": true
+    },
+    {
+      "id": "cortado",
+      "categoryId": "coffees",
+      "name": { "en": "Cortado", "tr": "Cortado" },
+      "description": {
+        "en": "Espresso cut with a small amount of warm milk, served in a glass.",
+        "tr": "Az miktarda ılık sütle dengelenmiş espresso, bardakta servis edilir."
+      },
+      "price": 90,
+      "image": "https://images.unsplash.com/photo-1519532059956-a63a37af5deb?auto=format&fit=crop&w=800&q=80",
+      "popular": false,
+      "active": true
+    },
+    {
+      "id": "iced-latte",
+      "categoryId": "cold-beverages",
+      "name": { "en": "Iced Latte", "tr": "Iced Latte" },
+      "description": {
+        "en": "Chilled espresso and cold milk served over ice.",
+        "tr": "Buz üzerinde servis edilen soğutulmuş espresso ve soğuk süt."
+      },
+      "price": 115,
+      "image": "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=800&q=80",
+      "popular": true,
+      "active": true
+    },
+    {
+      "id": "cold-brew",
+      "categoryId": "cold-beverages",
+      "name": { "en": "Cold Brew", "tr": "Cold Brew" },
+      "description": {
+        "en": "Slow-steeped for 18 hours for a smooth, naturally sweet finish.",
+        "tr": "18 saat yavaş demlenerek elde edilen, doğal tatlılıkta yumuşak bir lezzet."
+      },
+      "price": 120,
+      "image": "https://images.unsplash.com/photo-1759259639356-6eee63241869?auto=format&fit=crop&w=800&q=80",
+      "popular": false,
+      "active": true
+    },
+    {
+      "id": "iced-americano",
+      "categoryId": "cold-beverages",
+      "name": { "en": "Iced Americano", "tr": "Iced Americano" },
+      "description": {
+        "en": "Chilled espresso lengthened with cold water and served over ice.",
+        "tr": "Soğuk suyla uzatılmış ve buzla servis edilen soğutulmuş espresso."
+      },
+      "price": 95,
+      "image": "https://images.unsplash.com/photo-1581996323441-538096e854b9?auto=format&fit=crop&w=800&q=80",
+      "popular": false,
+      "active": true
+    },
+    {
+      "id": "fresh-orange-juice",
+      "categoryId": "cold-beverages",
+      "name": { "en": "Fresh Orange Juice", "tr": "Taze Portakal Suyu" },
+      "description": {
+        "en": "Squeezed to order from sun-ripened oranges.",
+        "tr": "Güneşte olgunlaşmış portakallardan sipariş üzerine sıkılır."
+      },
+      "price": 90,
+      "image": "https://images.unsplash.com/photo-1600271886742-f049cd451bba?auto=format&fit=crop&w=800&q=80",
+      "popular": false,
+      "active": true
+    },
+    {
+      "id": "sparkling-lemonade",
+      "categoryId": "cold-beverages",
+      "name": { "en": "Sparkling Lemonade", "tr": "Gazlı Limonata" },
+      "description": {
+        "en": "House-made lemonade with a splash of soda and fresh mint.",
+        "tr": "Az miktarda soda ve taze naneyle hazırlanan ev yapımı limonata."
+      },
+      "price": 80,
+      "image": "https://images.unsplash.com/photo-1555949366-819808d99159?auto=format&fit=crop&w=800&q=80",
+      "popular": false,
+      "active": true
+    },
+    {
+      "id": "san-sebastian-cheesecake",
+      "categoryId": "desserts-bakery",
+      "name": { "en": "San Sebastian Cheesecake", "tr": "San Sebastian Cheesecake" },
+      "description": {
+        "en": "Basque-style burnt cheesecake with a caramelized top and a creamy, crustless center.",
+        "tr": "Karamelize üst yüzeyi ve kremamsı, kabuksuz iç dokusuyla Bask usulü yanık cheesecake."
+      },
+      "price": 155,
+      "image": "https://images.unsplash.com/photo-1759303380841-55c09244fd2b?auto=format&fit=crop&w=800&q=80",
+      "popular": true,
+      "active": true
+    },
+    {
+      "id": "chocolate-brownie",
+      "categoryId": "desserts-bakery",
+      "name": { "en": "Chocolate Brownie", "tr": "Çikolatalı Brownie" },
+      "description": {
+        "en": "Fudgy dark chocolate brownie studded with walnuts.",
+        "tr": "Cevizli, yoğun kıvamlı bitter çikolatalı brownie."
+      },
+      "price": 95,
+      "image": "https://images.unsplash.com/photo-1643769377897-33ba0d88b240?auto=format&fit=crop&w=800&q=80",
+      "popular": false,
+      "active": true
+    },
+    {
+      "id": "butter-croissant",
+      "categoryId": "desserts-bakery",
+      "name": { "en": "Butter Croissant", "tr": "Tereyağlı Kruvasan" },
+      "description": {
+        "en": "Flaky, all-butter French pastry baked fresh daily.",
+        "tr": "Her gün taze pişirilen, katmer katmer tereyağlı Fransız hamur işi."
+      },
+      "price": 75,
+      "image": "https://images.unsplash.com/photo-1566550190349-0e08628941ab?auto=format&fit=crop&w=800&q=80",
+      "popular": false,
+      "active": true
+    },
+    {
+      "id": "tiramisu",
+      "categoryId": "desserts-bakery",
+      "name": { "en": "Tiramisu", "tr": "Tiramisu" },
+      "description": {
+        "en": "Espresso-soaked ladyfingers layered with mascarpone cream.",
+        "tr": "Espressoya batırılmış kedidili bisküvi ve mascarpone kreması katmanları."
+      },
+      "price": 150,
+      "image": "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&fit=crop&w=800&q=80",
+      "popular": true,
+      "active": true
+    },
+    {
+      "id": "cinnamon-roll",
+      "categoryId": "desserts-bakery",
+      "name": { "en": "Cinnamon Roll", "tr": "Tarçınlı Rulo" },
+      "description": {
+        "en": "Warm roll swirled with cinnamon and a cream cheese glaze.",
+        "tr": "Tarçınla harmanlanmış, krem peynirli sos ile kaplanmış sıcak rulo."
+      },
+      "price": 90,
+      "image": "https://images.unsplash.com/photo-1675274544987-a9aada7cd02a?auto=format&fit=crop&w=800&q=80",
+      "popular": false,
+      "active": true
+    },
+    {
+      "id": "avocado-toast",
+      "categoryId": "snacks",
+      "name": { "en": "Avocado Toast", "tr": "Avokadolu Tost" },
+      "description": {
+        "en": "Smashed avocado, chili flakes, and lemon on sourdough.",
+        "tr": "Ekşi mayalı ekmek üzerinde ezilmiş avokado, pul biber ve limon."
+      },
+      "price": 165,
+      "image": "https://images.unsplash.com/photo-1515041761709-f9fc96e04cd3?auto=format&fit=crop&w=800&q=80",
+      "popular": true,
+      "active": true
+    },
+    {
+      "id": "club-sandwich",
+      "categoryId": "snacks",
+      "name": { "en": "Club Sandwich", "tr": "Klüp Sandviç" },
+      "description": {
+        "en": "Triple-decker with turkey, bacon, lettuce, and tomato.",
+        "tr": "Hindi, bacon, marul ve domatesli üç katlı sandviç."
+      },
+      "price": 185,
+      "image": "https://images.unsplash.com/photo-1676300184084-de35d56a9a70?auto=format&fit=crop&w=800&q=80",
+      "popular": false,
+      "active": true
+    },
+    {
+      "id": "belgian-fries",
+      "categoryId": "snacks",
+      "name": { "en": "Belgian Fries", "tr": "Belçika Usulü Patates" },
+      "description": {
+        "en": "Crispy golden fries served with garlic aioli.",
+        "tr": "Sarımsaklı aioli sos ile servis edilen çıtır altın patates kızartması."
+      },
+      "price": 95,
+      "image": "https://images.unsplash.com/photo-1576100246753-1c1b4fa73481?auto=format&fit=crop&w=800&q=80",
+      "popular": false,
+      "active": true
+    },
+    {
+      "id": "grilled-cheese-toastie",
+      "categoryId": "snacks",
+      "name": { "en": "Grilled Cheese Toastie", "tr": "Kaşarlı Tost" },
+      "description": {
+        "en": "Melted three-cheese blend on grilled sourdough.",
+        "tr": "Izgara ekşi mayalı ekmek üzerinde eritilmiş üç peynir karışımı."
+      },
+      "price": 120,
+      "image": "https://images.unsplash.com/photo-1768966741319-0ab742d22eb8?auto=format&fit=crop&w=800&q=80",
+      "popular": false,
+      "active": true
+    },
+    {
+      "id": "granola-bowl",
+      "categoryId": "snacks",
+      "name": { "en": "Granola Bowl", "tr": "Granola Bowl" },
+      "description": {
+        "en": "House-made granola with yogurt, honey, and fresh seasonal fruit.",
+        "tr": "Yoğurt, bal ve mevsim meyveleriyle servis edilen ev yapımı granola."
+      },
+      "price": 140,
+      "image": "https://images.unsplash.com/photo-1692071106919-01bc0b9b0919?auto=format&fit=crop&w=800&q=80",
+      "popular": false,
+      "active": true
+    }
+  ]
+}

@@ -1,26 +1,99 @@
 @import "tailwindcss";
 
+/*
+ * A single, deliberate "obsidian & copper" café theme — warm dark surfaces
+ * with an amber/copper accent, rather than a light/dark toggle. This is the
+ * whole app's look, front-of-house and admin alike.
+ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #100d0a;
+  --surface: #1a1512;
+  --surface-hover: #221b16;
+  --border: #2c2420;
+  --foreground: #f4ecdd;
+  --muted: #a89a89;
+  --accent: #d99a4e;
+  --accent-foreground: #1a1210;
+  --success: #7fb069;
+  --danger: #e0685a;
+  --gold: #b08d57;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-border: var(--border);
   --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-success: var(--success);
+  --color-danger: var(--danger);
+  --color-gold: var(--gold);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-fraunces);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/*
+ * Light "artisanal editorial" theme for the public customer menu only —
+ * scoped to .menu-theme so the admin panel keeps the obsidian look above.
+ * Every component under this class already uses the semantic bg-background /
+ * bg-surface / text-foreground / text-muted / bg-accent / border-border
+ * utilities, so overriding these custom properties here is enough to
+ * re-theme the whole subtree without touching component markup.
+ */
+.menu-theme {
+  color-scheme: light;
+  --background: #fdfbf7;
+  --surface: #ffffff;
+  --surface-hover: #fbf3e7;
+  --border: #e7dcc8;
+  --foreground: #2b2118;
+  --muted: #8a7c68;
+  --accent: #bf5b3d;
+  --accent-foreground: #fff8f0;
+  --success: #7c8f6e;
+  --danger: #9b4030;
+  --gold: #b08d57;
+}
+
+html {
+  color-scheme: dark;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Hide scrollbars on horizontally-scrolling elements while keeping scroll behavior. */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Subtle "step into view" transition used when the customer menu switches
+   between the category grid, a category's products, and search results. */
+@keyframes menu-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.menu-fade-in {
+  animation: menu-fade-in 0.28s ease-out both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .menu-fade-in {
+    animation: none;
+  }
 }
