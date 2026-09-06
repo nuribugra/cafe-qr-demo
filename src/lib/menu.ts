@@ -1,8 +1,32 @@
-import { promises as fs } from "fs";
-import path from "path";
+import { Redis } from "@upstash/redis";
 import type { LocalizedText } from "@/lib/i18n";
+import seedMenuData from "../../data/menu.json";
 
-const DATA_FILE = path.join(process.cwd(), "data", "menu.json");
+// The whole menu is stored as a single JSON value under this key — reads and
+// writes replace it wholesale, the same way the old file-based version read
+// and rewrote the entire data/menu.json file on every change.
+const MENU_KEY = "cafe:menu";
+
+let cachedClient: Redis | null = null;
+
+/** Lazily builds the Upstash client, with a clear error if it isn't configured. */
+function getRedis(): Redis {
+  if (cachedClient) return cachedClient;
+
+  const url = process.env.UPSTASH_REDIS_REST_URL;
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+  if (!url || !token) {
+    throw new Error(
+      "Missing UPSTASH_REDIS_REST_URL / UPSTASH_REDIS_REST_TOKEN. " +
+        "Create a free database at https://upstash.com (or add the 'Upstash' " +
+        "integration from the Vercel Marketplace) and set these env vars — " +
+        "see .env.example."
+    );
+  }
+
+  cachedClient = new Redis({ url, token });
+  return cachedClient;
+}
 
 export interface Category {
   id: string;
@@ -30,15 +54,27 @@ export interface MenuData {
   items: MenuItem[];
 }
 
-/** Reads the menu JSON file from disk. */
+/**
+ * Reads the menu from Redis. On first run — nothing in Redis yet — it seeds
+ * the store from the starter menu bundled in data/menu.json, so a fresh
+ * deploy (or a fresh local Upstash database) still comes up with a working
+ * menu. After that, Redis is the source of truth; the JSON file is never
+ * read again at runtime.
+ */
 export async function readMenuData(): Promise<MenuData> {
-  const raw = await fs.readFile(DATA_FILE, "utf-8");
-  return JSON.parse(raw) as MenuData;
+  const redis = getRedis();
+  const data = await redis.get<MenuData>(MENU_KEY);
+  if (data) return data;
+
+  const seeded = seedMenuData as MenuData;
+  await redis.set(MENU_KEY, seeded);
+  return seeded;
 }
 
-/** Writes the menu JSON file back to disk, pretty-printed. */
+/** Writes the menu back to Redis, replacing the previous value entirely. */
 export async function writeMenuData(data: MenuData): Promise<void> {
-  await fs.writeFile(DATA_FILE, JSON.stringify(data, null, 2) + "\n", "utf-8");
+  const redis = getRedis();
+  await redis.set(MENU_KEY, data);
 }
 
 /** Generates a URL-friendly id from a product name, falling back to a random suffix on collision. */

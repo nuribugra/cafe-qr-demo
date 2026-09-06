@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# The Copper Cup — QR Menu
 
-## Getting Started
+A mobile-first digital menu and admin panel for a café, built with Next.js
+(App Router), Tailwind CSS, and Upstash Redis for persistent storage.
 
-First, run the development server:
+- **`/`** — the customer-facing menu: category grid → category drilldown,
+  search, and a TR/EN language switcher (Turkish by default).
+- **`/admin`** — a PIN-protected panel for staff to edit prices inline,
+  toggle items active/sold-out, feature items, and add or delete products.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Getting started
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. **Set up Redis.** The menu is stored in [Upstash Redis](https://upstash.com)
+   so it persists across deploys (Vercel's filesystem is read-only/ephemeral
+   at runtime, so a local JSON file won't survive a redeploy). Either:
+   - Create a free database at [upstash.com](https://upstash.com) and copy
+     its **REST URL** and **REST Token** from the database dashboard, or
+   - On Vercel, add the **Upstash** integration from the
+     [Vercel Marketplace](https://vercel.com/marketplace) to this project —
+     it provisions the database and injects the env vars for you, and you
+     can pull them locally with `vercel env pull .env.local`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2. **Configure environment variables.** Copy `.env.example` to `.env.local`
+   and fill in the two Upstash values (see `.env.example` for details). You
+   can also set `NEXT_PUBLIC_ADMIN_PIN` there to change the admin PIN from
+   the default `1234`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. **Install dependencies and run the dev server:**
 
-## Learn More
+   ```bash
+   npm install
+   npm run dev
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+   Open [http://localhost:3000](http://localhost:3000) for the menu, and
+   [http://localhost:3000/admin](http://localhost:3000/admin) for the admin
+   panel.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The first request after setup automatically seeds Redis from the starter
+menu in `data/menu.json` — after that, Redis is the live source of truth and
+that file is no longer read at runtime.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Project structure
+
+- `src/lib/menu.ts` — the `MenuData` types plus `readMenuData`/`writeMenuData`,
+  backed by Redis.
+- `src/app/api/menu/route.ts` — the menu API (`GET` is public; `POST`/
+  `PATCH`/`DELETE` require an `x-admin-pin` header matching the admin PIN).
+- `src/components/menu/*` — the customer-facing UI.
+- `src/components/admin/*` — the admin panel UI.
+- `src/lib/i18n.ts` — bilingual (EN/TR) UI copy and the `LocalizedText` helper.
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Push this repo to GitHub and import it on [Vercel](https://vercel.com/new).
+Add the Upstash integration (or set the env vars manually) before your first
+deploy so the menu has somewhere to persist.
