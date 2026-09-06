@@ -1,33 +1,42 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import type { MenuData, MenuItem } from "@/lib/menu";
-import { ADMIN_PIN, ADMIN_PIN_HEADER, ADMIN_SESSION_KEY } from "@/lib/admin";
 import { t, ui } from "@/lib/i18n";
 import { useLocale } from "@/lib/locale-store";
 import { LanguageToggle } from "@/components/LanguageToggle";
 import { EditablePrice } from "./EditablePrice";
 import { AddItemForm, type NewItemValues } from "./AddItemForm";
 
-async function adminFetch(input: string, init: RequestInit = {}) {
-  const res = await fetch(input, {
-    ...init,
-    headers: {
-      "Content-Type": "application/json",
-      [ADMIN_PIN_HEADER]: ADMIN_PIN,
-      ...(init.headers as Record<string, string> | undefined),
-    },
-  });
-  const body = await res.json().catch(() => ({}));
-  if (!res.ok) throw new Error(body.error || `Request failed (${res.status})`);
-  return body;
-}
+class SessionExpiredError extends Error {}
 
 export function AdminPanel() {
   const [data, setData] = useState<MenuData | null>(null);
   const [locale] = useLocale();
   const [loadError, setLoadError] = useState("");
   const [addingFor, setAddingFor] = useState<string | null>(null);
+  const router = useRouter();
+
+  // Auth is a session cookie (set by /api/admin/login) sent automatically on
+  // same-origin requests — nothing to attach here. A 401 means the session
+  // expired or was never valid, so bounce back to the login screen.
+  async function adminFetch(input: string, init: RequestInit = {}) {
+    const res = await fetch(input, {
+      ...init,
+      headers: {
+        "Content-Type": "application/json",
+        ...(init.headers as Record<string, string> | undefined),
+      },
+    });
+    if (res.status === 401) {
+      router.push("/admin/login");
+      throw new SessionExpiredError("Session expired.");
+    }
+    const body = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(body.error || `Request failed (${res.status})`);
+    return body;
+  }
 
   useEffect(() => {
     fetch("/api/menu")
@@ -69,13 +78,13 @@ export function AdminPanel() {
     setAddingFor(null);
   }
 
-  function handleLogout() {
+  async function handleLogout() {
     try {
-      sessionStorage.removeItem(ADMIN_SESSION_KEY);
+      await fetch("/api/admin/logout", { method: "POST" });
     } catch {
-      // ignore
+      // ignore — redirect regardless
     }
-    window.location.reload();
+    router.push("/admin/login");
   }
 
   if (loadError) return <p className="p-6 text-danger">{loadError}</p>;

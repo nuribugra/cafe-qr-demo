@@ -41,9 +41,12 @@ export const ui = {
     loadError: "Could not load the menu.",
 
     pinTitle: "Admin access",
-    pinSubtitle: "Enter the staff PIN to manage the menu.",
-    unlock: "Unlock",
-    incorrectPin: "Incorrect PIN.",
+    pinSubtitle: "Enter the admin password to manage the menu.",
+    passwordPlaceholder: "Password",
+    unlock: "Log in",
+    incorrectPin: "Incorrect password.",
+    rateLimited: "Too many attempts. Please wait a few minutes and try again.",
+    loggingIn: "Logging in…",
 
     editPriceSave: "Save",
     editPriceCancel: "Cancel",
@@ -93,9 +96,12 @@ export const ui = {
     loadError: "Menü yüklenemedi.",
 
     pinTitle: "Yönetici girişi",
-    pinSubtitle: "Menüyü yönetmek için personel PIN kodunu girin.",
-    unlock: "Kilidi aç",
-    incorrectPin: "Hatalı PIN.",
+    pinSubtitle: "Menüyü yönetmek için yönetici şifresini girin.",
+    passwordPlaceholder: "Şifre",
+    unlock: "Giriş yap",
+    incorrectPin: "Hatalı şifre.",
+    rateLimited: "Çok fazla deneme yapıldı. Lütfen birkaç dakika sonra tekrar deneyin.",
+    loggingIn: "Giriş yapılıyor…",
 
     editPriceSave: "Kaydet",
     editPriceCancel: "İptal",
